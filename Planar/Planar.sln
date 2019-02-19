@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planar", "Planar\Planar.csproj", "{A4FCA951-B404-451E-8E31-147A64BEA100}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4FCA951-B404-451E-8E31-147A64BEA100}.Debug|x86.ActiveCfg = Debug|x86
+		{A4FCA951-B404-451E-8E31-147A64BEA100}.Debug|x86.Build.0 = Debug|x86
+		{A4FCA951-B404-451E-8E31-147A64BEA100}.Release|x86.ActiveCfg = Release|x86
+		{A4FCA951-B404-451E-8E31-147A64BEA100}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00DF2FC8-AE88-44DE-AD5F-DCE47A08C4B3}
+	EndGlobalSection
+EndGlobal
