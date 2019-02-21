@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Planar.R2
 {
-    struct Vector3
+    public struct Vector3
     {
         private float[] data;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Planar.R2
 {
-    struct Matrix3x3
+    public struct Matrix3x3
     {
         private float[,] data;
 
@@ -38,7 +38,7 @@ namespace Planar.R2
         {
             float[,] data = {
                             { x, 0.0f, 0.0f },
-                            { 0.0f, x, 0.0f },
+                            { 0.0f, y, 0.0f },
                             { 0.0f, 0.0f, 1.0f }
                             };
 
@@ -100,6 +100,23 @@ namespace Planar.R2
                 a[1, 0] * vec.X + a[1, 1] * vec.Y + a[1, 2] * vec.Z,
                 a[2, 0] * vec.X + a[2, 1] * vec.Y + a[2, 2] * vec.Z
                 );
+        }
+
+        static public Matrix3x3 TransformMatrix(float scaleX, float scaleY, float theta, float x, float y)
+        {
+            Matrix3x3 ret = new Matrix3x3(new float[3, 3]{ { 0.0f, 0.0f, 0.0f}, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } });
+
+            ret[0, 0] = scaleX * (float)Math.Cos(theta);
+            ret[0, 1] = scaleY * -(float)Math.Sin(theta);
+            ret[0, 2] = x;
+            ret[1, 0] = scaleX * (float)Math.Sin(theta);
+            ret[1, 1] = scaleY * (float)Math.Cos(theta);
+            ret[1, 2] = y;
+            ret[2, 0] = 0;
+            ret[2, 1] = 0;
+            ret[2, 2] = 1;
+
+            return ret;
         }
     }
 }
