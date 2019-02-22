@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Planar.Modular
 {
+    /// <summary>
+    /// The Linear Algebra that places objects appropriatly.
+    /// </summary>
     public class Transform 
     {
         public Vector3 position;
@@ -14,9 +17,21 @@ namespace Planar.Modular
         public float scaleX;
         public float scaleY;
 
+
+        /// <summary>
+        /// Holds the current transform as a matrix.
+        /// </summary>
+        /// <remarks>
+        /// May remove in the future as a builder function is used
+        /// to return the transform matrix.
+        /// </remarks>
         Matrix3x3 matrix;
 
-
+        /// <summary>
+        /// Returns the Identity Matrix.
+        /// </summary>
+   
+        /// <returns>r</returns>
         static public Transform OriginR2()
         {
             return new Transform();
@@ -42,6 +57,9 @@ namespace Planar.Modular
             }
         }
 
+        /// <summary>
+        /// Gets or sets the number of radians from the X-Axis in a counter-clockwise motion.
+        /// </summary>
         public float Angle
         {
             get
@@ -78,6 +96,9 @@ namespace Planar.Modular
             }
         }
 
+        /// <summary>
+        /// Creates a Transform object that is set to the Identity.
+        /// </summary>
         public Transform()
         {
             position = new Vector3(0.0f, 0.0f, 0.0f);
@@ -87,6 +108,14 @@ namespace Planar.Modular
             matrix = Matrix3x3.Identity();
         }
 
+        /// <summary>
+        /// Creates and returns a transform matrix.
+        /// </summary>
+        /// <remarks>
+        /// The transforms are performed in the order of: scale, rotation, translation
+        /// </remarks>
+        /// <param name="delta">Change in time from last frame to current</param>
+        /// <param name="parent">What transform affects this one.</param>
         public void update(float delta, Transform parent)
         {
             this.matrix = parent.Matrix * Matrix3x3.TransformMatrix(this.scaleX, this.scaleY, this.theta, this.position.X, this.position.Y);
