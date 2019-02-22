@@ -51,7 +51,7 @@ namespace Planar.StateMachine
             IState next = stateStack.Peek().Exit();
             stateStack.Pop();
 
-            if(next == null)
+            if(next != null)
             {
                 this.Enter(next);
             }
