@@ -1,4 +1,5 @@
 ﻿using Planar.R2;
+using Planar.Render;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,21 @@ namespace Planar.Modular
                 this.name = value;
             }
         }
+
+        Material material;
+
+        public Material Material
+        {
+            get
+            {
+                return this.material;
+            }
+            set
+            {
+                this.material = value;
+            }
+        }
+
         /// <summary>
         /// A dictionary of other entities.
         /// </summary>
@@ -84,6 +100,11 @@ namespace Planar.Modular
             {
                 child.Value.update(delta, this);
             }
+        }
+
+        public void draw()
+        {
+            this.material.draw(this);
         }
     }
 }

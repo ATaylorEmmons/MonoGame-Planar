@@ -2,8 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Planar.Modular;
-
-
+using Planar.R2;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,7 +20,6 @@ namespace Planar
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            
         }
 
 

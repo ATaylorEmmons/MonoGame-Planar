@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Game.cs" />
     <Compile Include="Modular\InputComponent.cs" />
+    <Compile Include="Render\FillShapeMaterial.cs" />
+    <Compile Include="Render\Material.cs" />
     <Compile Include="StateMachine\InputState.cs" />
     <Compile Include="StateMachine\IState.cs" />
     <Compile Include="Modular\Entity.cs" />

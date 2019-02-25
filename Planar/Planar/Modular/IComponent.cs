@@ -17,6 +17,6 @@ namespace Planar.Modular
         /// <param name="owner"> The entity that this component is attached to.</param>
         /// <param name="delta"> In milliseconds the change in time from the last frame to this frame.</param>
         public abstract void update(Entity owner, float delta);
-
+        
     }
 }

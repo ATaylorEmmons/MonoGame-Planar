@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin FillShape.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:FillShape.fx
+
 #begin PrintFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

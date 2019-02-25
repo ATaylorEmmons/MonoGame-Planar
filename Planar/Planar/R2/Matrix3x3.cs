@@ -8,27 +8,35 @@ namespace Planar.R2
 {
     public struct Matrix3x3
     {
-        private float[,] data;
+        private float[] data;
 
-        public Matrix3x3(float[,] values) {
+        public Matrix3x3(float[] values) {
             data = values;
         }
 
-        public float this[uint i, uint j]
+        public float[] FloatArray
         {
             get
             {
-                return this.data[i, j];
+                return this.data;
+            }
+        }
+
+        public float this[uint i]
+        {
+            get
+            {
+                return this.data[i];
             }
             set
             {
-                this.data[i, j] = value;
+                this.data[i] = value;
             }
         }
 
         static public Matrix3x3 Identity()
         {
-            float[,] data = { { 1.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } };
+            float[] data = { 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f  };
             Matrix3x3 ret = new Matrix3x3(data);
 
             return ret;
@@ -36,11 +44,11 @@ namespace Planar.R2
 
         static public Matrix3x3 Scale(float x, float y)
         {
-            float[,] data = {
-                            { x, 0.0f, 0.0f },
-                            { 0.0f, y, 0.0f },
-                            { 0.0f, 0.0f, 1.0f }
-                            };
+            float[] data = {
+                            x, 0.0f, 0.0f,
+                            0.0f, y, 0.0f, 
+                            0.0f, 0.0f, 1.0f
+                           };
 
             Matrix3x3 ret = new Matrix3x3(data);
 
@@ -49,10 +57,10 @@ namespace Planar.R2
 
         static public Matrix3x3 Rotation(float theta)
         {
-            float[,] data = {
-                            { (float)Math.Cos(theta), -(float)Math.Sin(theta), 0.0f },
-                            { (float)Math.Sin(theta), (float)Math.Cos(theta), 0.0f },
-                            { 0.0f, 0.0f, 1.0f }
+            float[] data = {
+                            (float)Math.Cos(theta), -(float)Math.Sin(theta), 0.0f ,
+                            (float)Math.Sin(theta), (float)Math.Cos(theta), 0.0f,
+                            0.0f, 0.0f, 1.0f
                             };
 
             Matrix3x3 ret = new Matrix3x3(data);
@@ -62,10 +70,10 @@ namespace Planar.R2
 
         static public Matrix3x3 Translation(float x, float y)
         {
-            float[,] data = {
-                            { 1.0f, 0.0f, x },
-                            { 0.0f, 1.0f, y },
-                            { 0.0f, 0.0f, 1.0f }
+            float[] data = {
+                            1.0f, 0.0f, x,
+                            0.0f, 1.0f, y,
+                            0.0f, 0.0f, 1.0f
                             };
 
             Matrix3x3 ret = new Matrix3x3(data);
@@ -81,10 +89,10 @@ namespace Planar.R2
             {
                 for(uint j = 0; j < 3; j++)
                 {
-                    ret.data[i, j] = 0.0f;
+                    ret.data[3*i + j] = 0.0f;
                     for(uint k = 0; k < 3; k++)
                     {
-                        ret.data[i, j] += a[i, k] * b[k, j];
+                        ret.data[3*i + j] += a[3*i + k] * b[3*k + j];
                     }
                 }
             }
@@ -96,25 +104,25 @@ namespace Planar.R2
         static public Vector3 operator*(Matrix3x3 a, Vector3 vec)
         {
             return new Vector3(
-                a[0, 0] * vec.X + a[0, 1] * vec.Y + a[0, 2] * vec.Z,
-                a[1, 0] * vec.X + a[1, 1] * vec.Y + a[1, 2] * vec.Z,
-                a[2, 0] * vec.X + a[2, 1] * vec.Y + a[2, 2] * vec.Z
+                a[0] * vec.X + a[1] * vec.Y + a[2] * vec.Z,
+                a[3] * vec.X + a[4] * vec.Y + a[5] * vec.Z,
+                a[6] * vec.X + a[7] * vec.Y + a[8] * vec.Z
                 );
         }
 
         static public Matrix3x3 TransformMatrix(float scaleX, float scaleY, float theta, float x, float y)
         {
-            Matrix3x3 ret = new Matrix3x3(new float[3, 3]{ { 0.0f, 0.0f, 0.0f}, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f } });
+            Matrix3x3 ret = new Matrix3x3(new float[]{0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f });
 
-            ret[0, 0] = scaleX * (float)Math.Cos(theta);
-            ret[0, 1] = scaleY * -(float)Math.Sin(theta);
-            ret[0, 2] = x;
-            ret[1, 0] = scaleX * (float)Math.Sin(theta);
-            ret[1, 1] = scaleY * (float)Math.Cos(theta);
-            ret[1, 2] = y;
-            ret[2, 0] = 0;
-            ret[2, 1] = 0;
-            ret[2, 2] = 1;
+            ret[0] = scaleX * (float)Math.Cos(theta);
+            ret[1] = scaleY * -(float)Math.Sin(theta);
+            ret[2] = x;
+            ret[3] = scaleX * (float)Math.Sin(theta);
+            ret[4] = scaleY * (float)Math.Cos(theta);
+            ret[5] = y;
+            ret[6] = 0;
+            ret[7] = 0;
+            ret[8] = 1;
 
             return ret;
         }
