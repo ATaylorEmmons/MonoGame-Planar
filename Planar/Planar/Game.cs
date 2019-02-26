@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Planar.Modular;
-using Planar.R2;
+using Planar.Render;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,11 +14,14 @@ namespace Planar
     {
         GraphicsDeviceManager graphics;
 
-     
+        Entity triangle;
+        
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+           
 
         }
 
@@ -31,8 +34,16 @@ namespace Planar
    
         protected override void LoadContent()
         {
+            FillShapeMaterial mat = new FillShapeMaterial();
+            Effect effect = Content.Load<Effect>("FillShape");
+            mat.load(effect, GraphicsDevice);
+
+
             
-    
+            triangle = new Entity();
+
+            triangle.Material = mat;
+
         }
 
         protected override void UnloadContent()
@@ -45,6 +56,7 @@ namespace Planar
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            triangle.update(gameTime.ElapsedGameTime.Milliseconds, Transform.OriginR2());
 
             base.Update(gameTime);
         }
@@ -53,8 +65,8 @@ namespace Planar
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
 
+            triangle.draw(GraphicsDevice);
 
             base.Draw(gameTime);
         }

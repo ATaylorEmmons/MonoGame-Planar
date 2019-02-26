@@ -1,4 +1,5 @@
-﻿using Planar.R2;
+﻿
+using Microsoft.Xna.Framework.Graphics;
 using Planar.Render;
 using System;
 using System.Collections.Generic;
@@ -86,7 +87,7 @@ namespace Planar.Modular
         /// </remarks>
         /// <param name="delta">Change in time from the last frame to this one</param>
         /// <param name="parentTransform">The entity that owns this one. If this is a root entity pass in Transform::OriginR2()</param>
-        public new void update(float delta, Transform parentTransform)
+        public new void update(int delta, Transform parentTransform)
         {
             
             foreach(KeyValuePair<string, IComponent> component in this.components)
@@ -102,9 +103,9 @@ namespace Planar.Modular
             }
         }
 
-        public void draw()
+        public void draw(GraphicsDevice device)
         {
-            this.material.draw(this);
+            this.material.draw(this, device);
         }
     }
 }

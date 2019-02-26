@@ -1,4 +1,5 @@
-﻿using Planar.Modular;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Planar.Modular;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Planar.Render
 {
     public abstract class Material
     {
-        public abstract void load();
-        public abstract void draw(Entity owner);
+        public abstract void load(Effect effect);
+        public abstract void draw(Entity owner, GraphicsDevice device);
     }
 }

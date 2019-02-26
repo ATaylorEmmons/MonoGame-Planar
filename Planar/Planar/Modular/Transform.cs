@@ -1,4 +1,5 @@
-﻿using Planar.R2;
+﻿using Microsoft.Xna.Framework;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Planar.Modular
     /// </summary>
     public class Transform 
     {
-        public Vector3 position;
+        public Vector4 position;
         public float theta;
         public float scaleX;
         public float scaleY;
@@ -25,7 +26,7 @@ namespace Planar.Modular
         /// May remove in the future as a builder function is used
         /// to return the transform matrix.
         /// </remarks>
-        Matrix3x3 matrix;
+        Matrix matrix;
 
         /// <summary>
         /// Returns the Identity Matrix.
@@ -37,7 +38,7 @@ namespace Planar.Modular
             return new Transform();
         }
 
-        public Matrix3x3 Matrix
+        public Matrix Matrix
         {
             get
             {
@@ -53,7 +54,7 @@ namespace Planar.Modular
             }
             set
             {
-                position = new Vector3(value.X, value.Y, 1.0f);
+                position = new Vector4(value.X, value.Y, 0.0f, 1.0f);
             }
         }
 
@@ -101,11 +102,11 @@ namespace Planar.Modular
         /// </summary>
         public Transform()
         {
-            position = new Vector3(0.0f, 0.0f, 0.0f);
+            position = new Vector4(0.0f, 0.0f, 0.0f, 1.0f);
             theta = 0.0f;
             scaleX = 1.0f;
             scaleY = 1.0f;
-            matrix = Matrix3x3.Identity();
+            matrix = MatrixTools.Identity();
         }
 
         /// <summary>
@@ -114,11 +115,11 @@ namespace Planar.Modular
         /// <remarks>
         /// The transforms are performed in the order of: scale, rotation, translation
         /// </remarks>
-        /// <param name="delta">Change in time from last frame to current</param>
+        /// <param name="delta">Change in time(in milliseconds) from last frame to current</param>
         /// <param name="parent">What transform affects this one.</param>
-        public void update(float delta, Transform parent)
+        public void update(int delta, Transform parent)
         {
-            this.matrix = parent.Matrix * Matrix3x3.TransformMatrix(this.scaleX, this.scaleY, this.theta, this.position.X, this.position.Y);
+            this.matrix = parent.Matrix * MatrixTools.TransformMatrix(this.scaleX, this.scaleY, this.theta, this.position.X, this.position.Y);
         }
     }
 }
