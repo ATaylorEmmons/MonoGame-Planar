@@ -47,8 +47,13 @@
     <Compile Include="Game.cs" />
     <Compile Include="Modular\InputComponent.cs" />
     <Compile Include="Modular\MatrixTools.cs" />
-    <Compile Include="Render\FillShapeMaterial.cs" />
+    <Compile Include="Render\Fillshape\FillShapeMaterial.cs" />
+    <Compile Include="Render\Fillshape\RegularTriangle.cs" />
+    <Compile Include="Render\Fillshape\TriangleBuilder.cs" />
+    <Compile Include="Render\IPolygon.cs" />
     <Compile Include="Render\Material.cs" />
+    <Compile Include="Render\PolygonFactory.cs" />
+    <Compile Include="Render\PolygonFactoryMethod.cs" />
     <Compile Include="StateMachine\InputState.cs" />
     <Compile Include="StateMachine\IState.cs" />
     <Compile Include="Modular\Entity.cs" />

@@ -105,7 +105,7 @@ namespace Planar.Modular
 
         public void draw(GraphicsDevice device)
         {
-            this.material.draw(this, device);
+            this.material.draw(this);
         }
     }
 }

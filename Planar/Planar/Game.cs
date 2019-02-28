@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Planar.Modular;
 using Planar.Render;
+using Planar.Render.Fillshape;
+using Planar.Render.FillShapeMaterial;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,8 +16,15 @@ namespace Planar
     {
         GraphicsDeviceManager graphics;
 
+        PolygonFactory polygonFactory;
+        TriangleBuilder builder;
+
+
         Entity triangle;
-        
+
+        const float vel = 2f;
+
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -28,21 +37,29 @@ namespace Planar
 
         protected override void Initialize()
         {
+
+            graphics.PreferredBackBufferWidth = 1080;
+            graphics.PreferredBackBufferHeight = 720;
+
+            builder = new TriangleBuilder(500f);
+            polygonFactory = new PolygonFactory(builder);
+
+
             base.Initialize();
         }
 
    
         protected override void LoadContent()
         {
-            FillShapeMaterial mat = new FillShapeMaterial();
-            Effect effect = Content.Load<Effect>("FillShape");
-            mat.load(effect, GraphicsDevice);
-
-
-            
             triangle = new Entity();
 
-            triangle.Material = mat;
+            FillShapeMaterial triangleMaterial = new FillShapeMaterial();
+            triangleMaterial.RenderShape = polygonFactory.Build();
+            triangleMaterial.load(Content, GraphicsDevice);
+            triangleMaterial.Color = Color.Blue;
+
+            triangle.Material = triangleMaterial;
+
 
         }
 
@@ -56,6 +73,8 @@ namespace Planar
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            triangle.Position += new Vector2(vel, 0.0f);
+
             triangle.update(gameTime.ElapsedGameTime.Milliseconds, Transform.OriginR2());
 
             base.Update(gameTime);
@@ -67,6 +86,7 @@ namespace Planar
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             triangle.draw(GraphicsDevice);
+           
 
             base.Draw(gameTime);
         }

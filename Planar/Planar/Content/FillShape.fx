@@ -7,8 +7,10 @@
 	#define PS_SHADERMODEL ps_4_0_level_9_1
 #endif
 
-float3x3 ModelMatrix;
-float3x3 ViewMatrix;
+
+float2 resolution;
+float4x4 ModelMatrix;
+float4x4 ViewMatrix;
 float4 color;
 
 struct VertexShaderInput {
@@ -23,7 +25,16 @@ struct VertexShaderOutput {
 VertexShaderOutput VertexShaderFunction(VertexShaderInput input) {
 	VertexShaderOutput ret;
 	
-	ret.Position = float4(input.Position, 1.0f);//float4(mul(mul(input.Position,ModelMatrix), ViewMatrix), 1.0);
+	float4 Pos4 = float4(input.Position.x, input.Position.y, 0.0, 1.0);
+	float4x4 mat = {1.0, 0.0, 0.0, .5,
+					0.0, 1.0, 0.0, 0.0,
+					0.0, 0.0, 1.0, 0.0,
+					0.0, 0.0, 0.0, 1.0};
+	
+	float4 moved = mul(ModelMatrix, Pos4);
+	
+	float4 resolved = moved / float4(resolution.x, resolution.y, 1.0, 1.0);
+	ret.Position = resolved;
 	ret.Color = color;
 	
 	return ret;

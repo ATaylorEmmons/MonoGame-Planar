@@ -21,14 +21,33 @@ namespace Planar.Modular
 
         static public Matrix TransformMatrix(float scaleX, float scaleY, float theta, float x, float y)
         {
-            Matrix ret = new Matrix(
-                scaleX * (float)Math.Cos(theta), scaleY * -(float)Math.Sin(theta), x, 0.0f,
-                scaleX * (float)Math.Sin(theta), scaleY * (float)Math.Cos(theta), y, 0.0f,
-                0.0f, 0.0f, 0.0f, 0.0f,
-                0.0f, 0.0f, 0.0f, 0.0f 
-                );
 
-            return ret;
+        Matrix testScale = new Matrix(
+            scaleX, 0.0f, 0.0f, 0.0f,
+            0.0f, scaleY, 0.0f, 0.0f,
+            0.0f, 0.0f, 1.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 1.0f
+            );
+
+        Matrix testRotate = new Matrix(
+            (float)Math.Cos(theta), -(float)Math.Sin(theta), 0.0f, 0.0f,
+            (float)Math.Sin(theta), (float)Math.Cos(theta), 0.0f, 0.0f,
+            0.0f, 0.0f, 1.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 1.0f
+            );
+             
+
+        Matrix testTranslate = new Matrix(
+            1.0f, 0.0f, 0.0f, x,
+            0.0f, 1.0f, 0.0f, y,
+            0.0f, 0.0f, 1.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 1.0f
+            );
+
+
+            Matrix test = testTranslate * testRotate * testScale;
+
+            return test;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Planar.Modular
         /// <summary>
         /// Gets or sets the number of radians from the X-Axis in a counter-clockwise motion.
         /// </summary>
-        public float Angle
+        public float Rotation
         {
             get
             {
