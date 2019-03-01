@@ -9,13 +9,25 @@ namespace Planar.Render
 {
     public interface IPolygon
     {
-        int Size
+        int VertexCount
         {
             get;
         }
+
         VertexPosition[] Vertices
         {
             get;
         }
+
+        int IndexCount
+        {
+            get;
+        }
+
+        short[] Indices
+        {
+            get;
+        }
+
     }
 }

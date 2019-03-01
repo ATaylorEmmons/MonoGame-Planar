@@ -17,7 +17,7 @@ namespace Planar
         GraphicsDeviceManager graphics;
 
         PolygonFactory polygonFactory;
-        TriangleBuilder builder;
+        RegularPolygonBuilder builder;
 
 
         Entity triangle;
@@ -41,7 +41,9 @@ namespace Planar
             graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 720;
 
-            builder = new TriangleBuilder(500f);
+            graphics.ApplyChanges();
+
+            builder = new RegularPolygonBuilder(400, 500.0f);
             polygonFactory = new PolygonFactory(builder);
 
 
@@ -56,7 +58,7 @@ namespace Planar
             FillShapeMaterial triangleMaterial = new FillShapeMaterial();
             triangleMaterial.RenderShape = polygonFactory.Build();
             triangleMaterial.load(Content, GraphicsDevice);
-            triangleMaterial.Color = Color.Blue;
+            triangleMaterial.Color = Color.Wheat;
 
             triangle.Material = triangleMaterial;
 
@@ -67,13 +69,16 @@ namespace Planar
         {
         }
 
+        float scale = .1f;
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            triangle.Position += new Vector2(vel, 0.0f);
+
+            triangle.ScaleX -= scale;
+            triangle.ScaleY -= scale;
 
             triangle.update(gameTime.ElapsedGameTime.Milliseconds, Transform.OriginR2());
 

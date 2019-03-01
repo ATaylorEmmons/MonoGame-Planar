@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Planar.Render.Fillshape
 {
-    public class TriangleBuilder : PolygonFactoryMethod
+    public class TriangleBuilder
     {
         float radius;
         public float Radius
@@ -26,9 +26,6 @@ namespace Planar.Render.Fillshape
             this.radius = radius;
         }
        
-        public IPolygon construct()
-        {
-            return new RegularTriangle(radius);
-        }
+
     }
 }

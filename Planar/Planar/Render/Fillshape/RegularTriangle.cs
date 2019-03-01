@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Planar.Render.Fillshape
 {
-    public class RegularTriangle : IPolygon
+    public class RegularTriangle 
     {
         const int size = 3;
         public int Size
