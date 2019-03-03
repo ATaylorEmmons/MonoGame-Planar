@@ -8,6 +8,8 @@ namespace Planar.Render.Fillshape
 {
     public class RegularPolygonBuilder : PolygonFactoryMethod
     {
+        public string name;
+
         int edges;
         float radius;
         RegularPolygon polygon;
@@ -20,12 +22,37 @@ namespace Planar.Render.Fillshape
             this.radius = radius;
         }
 
+        public int Edges {
+            get
+            {
+                return this.edges;
+            }
+            set
+            {
+                this.created = false;
+                this.edges = value;
+            }
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return this.radius;
+            }
+            set
+            {
+                this.created = false;
+                this.radius = value;
+            }
+        }
+
         public IPolygon construct()
         {
             if(!created)
             {
                 this.polygon = new RegularPolygon(this.edges, radius);
-
+                created = true;
                 return polygon;
 
             } else

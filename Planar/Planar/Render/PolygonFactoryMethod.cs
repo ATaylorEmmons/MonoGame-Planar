@@ -9,5 +9,6 @@ namespace Planar.Render
     public interface PolygonFactoryMethod
     {
         IPolygon construct();
+
     }
 }

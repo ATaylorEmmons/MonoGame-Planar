@@ -50,8 +50,6 @@
     <Compile Include="Render\Fillshape\FillShapeMaterial.cs" />
     <Compile Include="Render\Fillshape\RegularPolygon.cs" />
     <Compile Include="Render\Fillshape\RegularPolygonBuilder.cs" />
-    <Compile Include="Render\Fillshape\RegularTriangle.cs" />
-    <Compile Include="Render\Fillshape\TriangleBuilder.cs" />
     <Compile Include="Render\IPolygon.cs" />
     <Compile Include="Render\Material.cs" />
     <Compile Include="Render\PolygonFactory.cs" />

@@ -21,6 +21,7 @@ namespace Planar
 
 
         Entity triangle;
+        Entity diamond;
 
         const float vel = 2f;
 
@@ -43,7 +44,8 @@ namespace Planar
 
             graphics.ApplyChanges();
 
-            builder = new RegularPolygonBuilder(400, 500.0f);
+            builder = new RegularPolygonBuilder(3, 500.0f);
+
             polygonFactory = new PolygonFactory(builder);
 
 
@@ -55,21 +57,38 @@ namespace Planar
         {
             triangle = new Entity();
 
+
             FillShapeMaterial triangleMaterial = new FillShapeMaterial();
             triangleMaterial.RenderShape = polygonFactory.Build();
             triangleMaterial.load(Content, GraphicsDevice);
-            triangleMaterial.Color = Color.Wheat;
+            triangleMaterial.Color = Color.Bisque;
 
             triangle.Material = triangleMaterial;
 
 
+            diamond = new Entity();
+
+            builder.Edges = 4;
+            
+
+            //polygonFactory.Builder = builder;
+
+
+            FillShapeMaterial diamondMaterial = new FillShapeMaterial();
+            diamondMaterial.RenderShape = polygonFactory.Build();
+            diamondMaterial.load(Content, GraphicsDevice);
+            diamondMaterial.Color = Color.Wheat;
+
+            diamond.Material = diamondMaterial;
+
+            triangle.Name = "Triangle";
+            diamond.AddChild(triangle);
         }
 
         protected override void UnloadContent()
         {
         }
 
-        float scale = .1f;
 
         protected override void Update(GameTime gameTime)
         {
@@ -77,10 +96,9 @@ namespace Planar
                 Exit();
 
 
-            triangle.ScaleX -= scale;
-            triangle.ScaleY -= scale;
-
-            triangle.update(gameTime.ElapsedGameTime.Milliseconds, Transform.OriginR2());
+           
+            diamond.update(gameTime.ElapsedGameTime.Milliseconds, Transform.OriginR2());
+            
 
             base.Update(gameTime);
         }
@@ -90,6 +108,7 @@ namespace Planar
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            diamond.draw(GraphicsDevice);
             triangle.draw(GraphicsDevice);
            
 
